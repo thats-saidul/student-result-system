@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Result Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+ 
+    
+    <header class="app-header">
+      <h1 class="logo">RESULT</h1>
+      <p class="app-subtitle">Student Result Management System</p>
+    </header>
+ 
+    
+    <section class="stats" aria-label="Summary statistics">
+      <article class="stat-card">
+        <h2 class="stat-label">Total Students</h2>
+        <p class="stat-value" id="stat-total">0</p>
+      </article>
+      <article class="stat-card">
+        <h2 class="stat-label">Passed</h2>
+        <p class="stat-value" id="stat-passed">0</p>
+      </article>
+      <article class="stat-card">
+        <h2 class="stat-label">Failed</h2>
+        <p class="stat-value" id="stat-failed">0</p>
+      </article>
+      <article class="stat-card">
+        <h2 class="stat-label">Class Average</h2>
+        <p class="stat-value" id="stat-average">0.00</p>
+      </article>
+    </section>
+ 
+    
+    <section class="form-section" aria-labelledby="form-title">
+      <h2 id="form-title">Add Student</h2>
+ 
+      <form id="student-form" novalidate>
+        <!-- Edit mode-e ei hidden field-e student-er id thakbe -->
+        <input type="hidden" id="student-id" />
+ 
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="student-name">Student Name</label>
+            <input type="text" id="student-name" placeholder="e.g. Rahim Ahmed" />
+            <small class="error-message" id="error-name"></small>
+          </div>
+ 
+          <div class="form-group">
+            <label for="student-roll">Roll Number</label>
+            <input type="text" id="student-roll" placeholder="e.g. 106" />
+            <small class="error-message" id="error-roll"></small>
+          </div>
+ 
+          <div class="form-group">
+            <label for="student-department">Department</label>
+            <select id="student-department">
+              <option value="">Select department</option>
+              <option value="Science">Science</option>
+              <option value="Commerce">Commerce</option>
+              <option value="Arts">Arts</option>
+            </select>
+            <small class="error-message" id="error-department"></small>
+          </div>
+ 
+          <div class="form-group">
+            <label for="mark-math">Math Marks</label>
+            <input type="number" id="mark-math" min="0" max="100" placeholder="0 - 100" />
+            <small class="error-message" id="error-math"></small>
+          </div>
+ 
+          <div class="form-group">
+            <label for="mark-english">English Marks</label>
+            <input type="number" id="mark-english" min="0" max="100" placeholder="0 - 100" />
+            <small class="error-message" id="error-english"></small>
+          </div>
+ 
+          <div class="form-group">
+            <label for="mark-science">Science Marks</label>
+            <input type="number" id="mark-science" min="0" max="100" placeholder="0 - 100" />
+            <small class="error-message" id="error-science"></small>
+          </div>
+        </div>
+ 
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-btn">Add Student</button>
+          <button type="button" class="btn btn-secondary hidden" id="cancel-edit-btn">Cancel Edit</button>
+        </div>
+      </form>
+    </section>
+ 
+    
+    <section class="controls" aria-label="Search, filter and sort">
+      <div class="search-box">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Search by name or roll..."
+          aria-label="Search students by name or roll number"
+        />
+      </div>
+ 
+      <div class="control-group">
+        <label for="filter-department" class="sr-only">Department</label>
+        <select id="filter-department">
+          <option value="All">All Departments</option>
+          <option value="Science">Science</option>
+          <option value="Commerce">Commerce</option>
+          <option value="Arts">Arts</option>
+        </select>
+ 
+        <label for="filter-result" class="sr-only">Result</label>
+        <select id="filter-result">
+          <option value="All">All Results</option>
+          <option value="Pass">Pass</option>
+          <option value="Fail">Fail</option>
+        </select>
+ 
+        <label for="filter-grade" class="sr-only">Grade</label>
+        <select id="filter-grade">
+          <option value="All">All Grades</option>
+          <option value="A+">A+</option>
+          <option value="A">A</option>
+          <option value="A-">A-</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </select>
+ 
+        <label for="sort-select" class="sr-only">Sort by</label>
+        <select id="sort-select">
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="total-desc">Total (High to Low)</option>
+          <option value="total-asc">Total (Low to High)</option>
+          <option value="average-desc">Average (High to Low)</option>
+        </select>
+ 
+        <button type="button" class="btn btn-secondary" id="reset-btn">Reset</button>
+        <button type="button" class="btn btn-primary" id="export-btn">Export CSV</button>
+      </div>
+    </section>
+ 
+    
+    <div class="state-box hidden" id="loading-state" role="status">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Loading students...</p>
+    </div>
+ 
+    <div class="state-box state-error hidden" id="error-state" role="alert">
+      <p id="error-state-message">Failed to load student data.</p>
+      <button type="button" class="btn btn-primary" id="retry-btn">Retry</button>
+    </div>
+ 
+    
+    <section class="table-section" id="table-section" aria-label="Student records">
+      <div class="table-wrapper">
+        <table id="student-table">
+          <thead>
+            <tr>
+              <th scope="col">Student Name</th>
+              <th scope="col">Roll</th>
+              <th scope="col">Department</th>
+              <th scope="col" class="num">Math</th>
+              <th scope="col" class="num">English</th>
+              <th scope="col" class="num">Science</th>
+              <th scope="col" class="num">Total</th>
+              <th scope="col" class="num">Average</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Result</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <!-- Rows JavaScript diye dynamically toiri hobe -->
+          <tbody id="student-table-body"></tbody>
+        </table>
+      </div>
+ 
+      
+      <p class="empty-message hidden" id="empty-state">No students match your search or filters.</p>
+ 
+      
+      <nav class="pagination" id="pagination" aria-label="Pagination">
+        <button type="button" class="page-btn" id="prev-btn" aria-label="Previous page">&lsaquo; Prev</button>
+        <span class="page-numbers" id="page-numbers"></span>
+        <button type="button" class="page-btn" id="next-btn" aria-label="Next page">Next &rsaquo;</button>
+      </nav>
+    </section>
+ 
+  </main>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
+ 
