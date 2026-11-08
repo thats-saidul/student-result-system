@@ -1,11 +1,10 @@
-/* ---------- 1. Variables & reset ---------- */
 :root {
   --bg-page: #f3f4f6;
   --bg-card: #e6e9ec;
   --bg-input: #ffffff;
   --text-main: #1f2933;
   --text-muted: #6b7280;
-  --accent: #1f5a43;        /* dark green, same as screenshot line */
+  --accent: #1f5a43;       
   --accent-hover: #174532;
   --line: #c9d0d6;
   --danger: #b42318;
@@ -38,7 +37,6 @@ h1, h2, p {
   margin: 0;
 }
 
-/* ---------- 2. Layout ---------- */
 .app {
   max-width: 1200px;
   margin: 0 auto;
@@ -62,7 +60,7 @@ h1, h2, p {
   font-size: 0.95rem;
 }
 
-/* ---------- 3. Dashboard stat cards ---------- */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -80,7 +78,7 @@ h1, h2, p {
 .stat-label {
   font-size: 0.85rem;
   font-weight: 400;
-  color: var(--text-muted);
+  color: var(--text-main);
 }
 
 .stat-value {
@@ -89,7 +87,6 @@ h1, h2, p {
   color: var(--accent);
 }
 
-/* ---------- 4. Form ---------- */
 .form-section {
   margin-bottom: 28px;
   padding: 24px;
@@ -116,7 +113,7 @@ h1, h2, p {
 
 .form-group label {
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: var(--text-main);
 }
 
 input,
@@ -136,7 +133,7 @@ select:focus {
   outline-offset: 1px;
 }
 
-/* JS invalid input-e ei class add korbe (Step 6) */
+
 .input-invalid {
   border-color: var(--danger);
 }
@@ -153,7 +150,7 @@ select:focus {
   margin-top: 16px;
 }
 
-/* ---------- 5. Controls ---------- */
+
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -191,7 +188,7 @@ select:focus {
   cursor: pointer;
 }
 
-/* ---------- 6. Buttons ---------- */
+
 .btn {
   font-family: inherit;
   font-size: 0.9rem;
@@ -225,7 +222,7 @@ select:focus {
   background: #f0f2f4;
 }
 
-/* Table-er Edit / Delete button (Step 9) */
+
 .btn-small {
   padding: 5px 12px;
   font-size: 0.8rem;
@@ -247,7 +244,7 @@ select:focus {
   background: var(--danger-bg);
 }
 
-/* ---------- 7. Loading / error states ---------- */
+
 .state-box {
   display: flex;
   flex-direction: column;
@@ -277,7 +274,7 @@ select:focus {
   }
 }
 
-/* ---------- 8. Table ---------- */
+
 .table-wrapper {
   overflow-x: auto;   /* choto screen-e table scroll hobe */
 }
@@ -293,7 +290,7 @@ thead th {
   text-align: left;
   font-weight: 400;
   font-size: 0.95rem;
-  border-bottom: 2px solid var(--accent);  /* screenshot-er green line */
+  border-bottom: 2px solid var(--accent);  
   white-space: nowrap;
 }
 
@@ -322,7 +319,7 @@ tbody tr:hover {
   color: var(--text-muted);
 }
 
-/* ---------- 9. Badges ---------- */
+
 .badge {
   display: inline-block;
   padding: 3px 12px;
@@ -361,7 +358,7 @@ tbody tr:hover {
   color: var(--danger);
 }
 
-/* ---------- 10. Pagination ---------- */
+
 .pagination {
   display: flex;
   justify-content: flex-end;
@@ -419,7 +416,7 @@ tbody tr:hover {
   border: 0;
 }
 
-/* ---------- 12. Responsive ---------- */
+
 @media (max-width: 900px) {
   .stats {
     grid-template-columns: repeat(2, 1fr);
