@@ -395,7 +395,14 @@ tbody tr:hover {
 
 .page-numbers {
   display: flex;
+  align-items: center;
   gap: 4px;
+}
+ 
+/* Page number-er majhe "..." */
+.page-ellipsis {
+  padding: 0 4px;
+  color: var(--text-muted);
 }
 
 
@@ -447,7 +454,8 @@ tbody tr:hover {
     align-items: stretch;
   }
 
-  .search-box {
+    .search-box {
+    flex: none;       /* column layout-e flex-basis height hoye jay, tai bondho */
     max-width: none;
   }
 
